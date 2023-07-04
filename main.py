@@ -1,10 +1,11 @@
 import requests
 from sent_email import send_email
 
-# Get Topic
-topic = "Data engineer project"
+# Get Topic and language
+topic = "ETL pipeline"
 language = "en"
 
+# API key and url
 api_key = "6d93aeca3b6e47359757fb74f60f9b20"
 url = "https://newsapi.org/v2/everything?" \
     f"q={topic}&" \
@@ -18,10 +19,10 @@ request = requests.get(url)
 # Get dict with data
 content = request.json()
 
-# Access articles titles and descriptions
+# Subject and message
 message = "Subject: Today's news about" + " " + topic + "\n"
 
-# if content.get("articles") is not None:
+# Access articles titles and descriptions
 for article in content.get("articles")[:20]:
     if (article.get("title") is not None) and (article.get("description") is not None):
         message += article.get("title") + "\n" + article.get(
